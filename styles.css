@@ -1,41 +1,37 @@
 /* Common styles for both pages */
 body {
     font-family: Arial, sans-serif;
-    background-color: #2f2f2f;
+    background-color: #2f2f2f; /* Dark grey background */
     color: white;
     margin: 0;
     padding: 0;
 }
 
+/* Header styling */
 header {
-    background-color: #444;
-    padding: 20px;
+    background-color: #333; /* Darker than the background */
+    padding: 10px 0;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    position: relative;
+    top: 0;
+    width: 100%;
 }
 
-/* Make the logo link bigger and dark red */
 header .logo {
-    color: #8B0000; /* Very dark red */
-    text-decoration: none; /* Remove the default underline */
-    font-size: 40px; /* Increase the font size */
+    color: red; /* Red color for the logo */
+    text-decoration: none; /* Remove underline */
+    font-size: 40px; /* Large text */
     font-weight: bold;
+    transition: color 0.3s ease;
 }
 
+/* Change color on hover */
 header .logo:hover {
-    color: #d00000; /* Slightly lighter red on hover */
+    color: darkred;
 }
 
-/* Reset styles for the link to avoid it turning blue */
-header .logo:link,
-header .logo:visited {
-    color: #8B0000; /* Dark red for both normal and visited state */
-}
-
-header .logo:active {
-    color: #d00000; /* Lighter red when active */
-}
-
+/* Center main content */
 main {
     padding: 20px;
     display: flex;
@@ -45,12 +41,16 @@ main {
     height: 100vh;
 }
 
+/* Player container styles */
 #player-container {
     width: 100%;
     max-width: 800px;
     margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
 }
 
+/* Fullscreen button styling */
 button {
     background-color: red;
     color: white;
@@ -60,6 +60,8 @@ button {
     font-size: 20px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    display: block;
+    margin: 0 auto; /* Center the button */
 }
 
 button:hover {
