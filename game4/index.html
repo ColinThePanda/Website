@@ -5,6 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Play Flash Game</title>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #flash-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
     <h1>My Flash Game</h1>
@@ -17,6 +33,35 @@
         var player = ruffle.createPlayer();
         document.getElementById('flash-content').appendChild(player);
         player.load("game.swf");
+
+        // Function to trigger fullscreen automatically
+        function requestFullscreen() {
+            if (player.requestFullscreen) {
+                player.requestFullscreen();
+            } else if (player.mozRequestFullScreen) { // Firefox
+                player.mozRequestFullScreen();
+            } else if (player.webkitRequestFullscreen) { // Chrome and Safari
+                player.webkitRequestFullscreen();
+            } else if (player.msRequestFullscreen) { // IE
+                player.msRequestFullscreen();
+            }
+        }
+
+        // Wait until the player has loaded and then request fullscreen
+        player.onload = function() {
+            var flashContainer = document.getElementById('flash-content');
+            flashContainer.style.width = '100vw';
+            flashContainer.style.height = '100vh';
+            player.width = window.innerWidth;
+            player.height = window.innerHeight;
+            requestFullscreen(); // Automatically request fullscreen
+        };
+
+        // Make the game adjust to the window size
+        window.onresize = function() {
+            player.width = window.innerWidth;
+            player.height = window.innerHeight;
+        };
     </script>
 </body>
 </html>
