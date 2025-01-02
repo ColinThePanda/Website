@@ -1,4 +1,4 @@
-/* General page styles */
+/* Common styles for both pages */
 body {
     font-family: Arial, sans-serif;
     background-color: #2f2f2f; /* Dark grey background */
@@ -7,44 +7,41 @@ body {
     padding: 0;
 }
 
-/* Header styles */
+/* Header styling */
 header {
-    background-color: #222; /* Darker than the background */
-    color: red;
-    padding: 0px 0px;
+    background-color: #333; /* Darker than the background */
+    padding: 0 0;
     text-align: center;
-    position: fixed; /* Make it fixed at the top */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    position: relative;
     top: 0;
     width: 100%;
-    z-index: 10;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Logo styles */
 header .logo {
-    font-size: 40px;
-    font-weight: bold;
-    text-decoration: none;
     color: red; /* Red color for the logo */
+    text-decoration: none; /* Remove underline */
+    font-size: 40px; /* Large text */
+    font-weight: bold;
     transition: color 0.3s ease;
 }
 
-/* Logo hover effect */
+/* Change color on hover */
 header .logo:hover {
     color: darkred;
 }
 
-/* Main content (player container and button) */
+/* Center main content */
 main {
-    padding: 100px 20px 20px; /* Ensure the header does not overlap the content */
+    padding: 20px;
     display: flex;
+    justify-content: center;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    min-height: 100vh;
+    height: 100vh;
 }
 
-/* Centered player container */
+/* Player container styles */
 #player-container {
     width: 100%;
     max-width: 800px;
@@ -53,14 +50,14 @@ main {
     justify-content: center;
 }
 
-/* Fullscreen button styles */
+/* Fullscreen button styling */
 button {
     background-color: red;
     color: white;
     border: 2px solid black;
     border-radius: 25px;
     padding: 15px 30px;
-    font-size: 25px;
+    font-size: 20px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     display: block;
@@ -85,7 +82,6 @@ button:hover {
     text-align: center;
 }
 
-/* Game link hover effect */
 .game-link:hover {
     background-color: darkred;
 }
@@ -94,6 +90,7 @@ button:hover {
 .main-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
     width: 80%;
     margin: 0 auto;
 }
