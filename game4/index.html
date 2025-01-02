@@ -60,10 +60,18 @@
         .fullscreen-button:hover {
             background-color: #888;
         }
+
+        /* Header styling */
+        h1 {
+            text-align: center;
+            color: white;
+            z-index: 10;
+            position: relative;
+        }
     </style>
 </head>
 <body>
-    <h1 style="text-align: center; color: white;">My Flash Game</h1>
+    <h1>My Flash Game</h1>
     <div id="flash-content">
         <p id="flash-message">Your browser does not support Flash. Playing through Ruffle...</p>
     </div>
@@ -87,31 +95,30 @@
 
             // Hide the message behind the player
             document.getElementById('flash-message').style.zIndex = -1;
-
-            // Automatically request fullscreen (optional based on browser behavior)
-            requestFullscreen();
         };
 
-        // Function to request fullscreen only for the player
+        // Function to request fullscreen only for the player container
         function requestFullscreen() {
-            if (document.getElementById('flash-content').requestFullscreen) {
-                document.getElementById('flash-content').requestFullscreen();
-            } else if (document.getElementById('flash-content').mozRequestFullScreen) { // Firefox
-                document.getElementById('flash-content').mozRequestFullScreen();
-            } else if (document.getElementById('flash-content').webkitRequestFullscreen) { // Chrome and Safari
-                document.getElementById('flash-content').webkitRequestFullscreen();
-            } else if (document.getElementById('flash-content').msRequestFullscreen) { // IE
-                document.getElementById('flash-content').msRequestFullscreen();
+            var flashContainer = document.getElementById('flash-content');
+            if (flashContainer.requestFullscreen) {
+                flashContainer.requestFullscreen();
+            } else if (flashContainer.mozRequestFullScreen) { // Firefox
+                flashContainer.mozRequestFullScreen();
+            } else if (flashContainer.webkitRequestFullscreen) { // Chrome and Safari
+                flashContainer.webkitRequestFullscreen();
+            } else if (flashContainer.msRequestFullscreen) { // IE
+                flashContainer.msRequestFullscreen();
             }
         }
 
         // Function to toggle fullscreen mode when button is clicked
         function toggleFullscreen() {
+            var flashContainer = document.getElementById('flash-content');
             if (!document.fullscreenElement && 
                 !document.mozFullScreenElement && 
                 !document.webkitFullscreenElement && 
                 !document.msFullscreenElement) {
-                    requestFullscreen();
+                requestFullscreen();
             } else {
                 if (document.exitFullscreen) {
                     document.exitFullscreen();
