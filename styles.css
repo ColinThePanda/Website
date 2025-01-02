@@ -7,32 +7,30 @@ body {
     padding: 0;
 }
 
-/* Header styles */
+/* Ensures the header spans the full width of the screen */
 header {
-    background-color: #222; /* Darker shade for header */
-    color: red; /* Red color for text */
-    padding: 0;
-    margin: 0;
+    width: 100%; /* Full width */
+    margin: 0;   /* Removes any default margin */
+    padding: 0;  /* Removes any default padding */
+    background-color: #333; /* Darker background color for the header */
     text-align: center;
-    position: fixed; /* Fixed to top */
+    position: fixed; /* Keeps it at the top */
     top: 0;
-    width: 100%;
-    z-index: 10;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    font-size: 50px;
+    left: 0;
+    z-index: 1000; /* Ensures it's on top of other elements */
 }
 
-/* Remove link default styles from the logo */
 header .logo {
-    text-decoration: none;
-    color: red; /* Red color for the logo */
-    transition: color 0.3s ease;
+    color: #8B0000; /* Dark red color */
+    font-size: 36px;
+    text-decoration: none; /* Removes underline from the link */
+    padding: 10px 0;
 }
 
-/* Logo hover effect */
 header .logo:hover {
-    color: darkred;
+    color: #B22222; /* Slightly lighter red on hover */
 }
+
 
 /* Main content area */
 main {
