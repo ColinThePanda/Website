@@ -44,7 +44,7 @@ main {
 /* Fullscreen button */
 #fullscreen-button {
     color: white;
-    background-color: #007bff; /* Consistent with the existing buttons */
+    background-color: #ff0000; /* Consistent with the existing buttons */
     border: none;
     border-radius: 5px; /* Rounded corners */
     padding: 10px 20px;
@@ -55,5 +55,5 @@ main {
 }
 
 #fullscreen-button:hover {
-    background-color: #0056b3; /* Consistent hover effect */
+    background-color: #b30000; /* Consistent hover effect */
 }
