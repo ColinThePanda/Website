@@ -63,12 +63,12 @@
 </head>
 <body>
 
-    <button class="fullscreen-button" onclick="toggleFullscreen()">Fullscreen</button>
-
     <div id="flash-container">
         <div id="flash-message">Your browser does not support Flash. Playing through Ruffle...</div>
         <div id="flash-content"></div>
     </div>
+
+    <button class="fullscreen-button" onclick="toggleFullscreen()">Fullscreen</button>
 
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <script>
@@ -94,7 +94,7 @@
         };
 
         // Correctly call the embed function with the actual SWF file URL
-        swfobject.embedSWF('https://colinthepanda.github.io/Godot-Website/game4/game.swf', 'flash-content', '100', '100');
+        swfobject.embedSWF('https://colinthepanda.github.io/Godot-Website/game4/game.swf', 'flash-content', '1280', '720');
 
         // Hide the message when the player loads
         window.onload = function() {
