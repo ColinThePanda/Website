@@ -3,89 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Play Flash Game</title>
-    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script> <!-- Correct Ruffle script -->
+    <title>Ruffle Flash Game</title>
     <style>
-        body, html {
+        /* Background color */
+        body {
+            background-color: #2e2e2e; /* Dark gray */
+            color: white;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            height: 100%;
-            overflow: hidden;
-            background-color: #333; 
-            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
-        #flash-content {
+
+        /* Centering content */
+        #flash-container {
+            position: relative;
             width: 100%;
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
         }
+
+        /* Flash message behind the player */
         #flash-message {
             position: absolute;
-            z-index: -1;
-            color: white;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             font-size: 20px;
-            font-weight: bold;
-            text-align: center;
-            word-wrap: break-word;
-            padding: 10px;
+            z-index: 1;
+            color: white;
         }
+
+        /* Fullscreen button styling */
         .fullscreen-button {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: #555;
+            top: 10px;
+            left: 10px;
+            padding: 10px 15px;
+            background-color: #333;
             color: white;
             border: none;
-            padding: 10px 20px;
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
-            border-radius: 5px;
             z-index: 10;
         }
-        h1 {
-            text-align: center;
-            color: white;
-            position: relative;
+
+        .fullscreen-button:hover {
+            background-color: #555;
+        }
+
+        /* Ruffle player full width */
+        #flash-content {
+            width: 100%;
+            height: 100%;
+            background-color: black;
         }
     </style>
 </head>
 <body>
-    <h1>My Flash Game</h1>
-    <div id="flash-content"></div>
+
+    <!-- Fullscreen button -->
     <button class="fullscreen-button" onclick="toggleFullscreen()">Fullscreen</button>
 
+    <!-- Flash game container -->
+    <div id="flash-container">
+        <div id="flash-message">Your browser does not support Flash. Playing through Ruffle...</div>
+        <div id="flash-content">
+            <!-- Ruffle embed script -->
+            <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+            <script>
+                // Initialize Ruffle Player
+                const ruffle = window.RufflePlayer.new();
+                const player = ruffle.createPlayer();
+
+                // Attach player to the div
+                const flashContainer = document.getElementById("flash-content");
+                flashContainer.appendChild(player);
+
+                // Load SWF file
+                player.load("path/to/your/flash-game.swf");
+
+                // Hide flash message when the player is ready
+                player.onload = function() {
+                    // Hide flash message
+                    document.getElementById('flash-message').style.display = 'none';
+                    // Resize player when loaded
+                    player.width = window.innerWidth;
+                    player.height = window.innerHeight;
+                };
+            </script>
+        </div>
+    </div>
+
     <script>
-        var ruffle = window.RufflePlayer.newest();
-        var player = ruffle.createPlayer();
-        document.getElementById('flash-content').appendChild(player);
-        player.load("game.swf");
+        // Request fullscreen function
+        function requestFullscreen() {
+            var flashContainer = document.getElementById('flash-content');
+            if (flashContainer.requestFullscreen) {
+                flashContainer.requestFullscreen();
+            } else if (flashContainer.mozRequestFullScreen) { // Firefox
+                flashContainer.mozRequestFullScreen();
+            } else if (flashContainer.webkitRequestFullscreen) { // Chrome/Safari
+                flashContainer.webkitRequestFullscreen();
+            } else if (flashContainer.msRequestFullscreen) { // IE
+                flashContainer.msRequestFullscreen();
+            }
+        }
 
-        player.onload = function() {
-            player.width = window.innerWidth;
-            player.height = window.innerHeight;
-        };
-
-        // Get the Ruffle player element
-        const rufflePlayer = document.getElementById("flash-content");
-
-        // Function to toggle fullscreen
+        // Toggle fullscreen
         function toggleFullscreen() {
-        if (document.fullscreenElement) {
-            document.exitFullscreen();
-        } else {
-            rufflePlayer.requestFullscreen();
-        }
+            var flashContainer = document.getElementById('flash-content');
+            if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+                // Not in fullscreen, request it
+                requestFullscreen();
+            } else {
+                // Already in fullscreen, exit it
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen(); // Firefox
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen(); // Chrome/Safari
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen(); // IE
+                }
+            }
         }
 
-        // Add an event listener (e.g., on a button click)
-        const fullscreenButton = document.getElementById("fullscreen-button");
-        fullscreenButton.addEventListener("click", toggleFullscreen);
+        // Resize player when fullscreen is toggled
+        document.addEventListener("fullscreenchange", function() {
+            if (document.fullscreenElement) {
+                // Resize player when entering fullscreen
+                const player = document.querySelector('object');
+                player.width = window.innerWidth;
+                player.height = window.innerHeight;
+            }
+        });
+
+        // Handle resizing when the window is resized
+        window.onresize = function() {
+            if (!document.fullscreenElement) {
+                // Resize player to match window size
+                const player = document.querySelector('object');
+                player.width = window.innerWidth;
+                player.height = window.innerHeight;
+            }
+        };
     </script>
 </body>
 </html>
