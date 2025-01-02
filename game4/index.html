@@ -84,6 +84,13 @@
                 });
 
             player.load({ url: url });
+
+            // Check if fullscreen is enabled
+            if (player.fullscreenEnabled) {
+                console.log("Fullscreen is enabled!");
+            } else {
+                console.log("Fullscreen is not enabled.");
+            }
         };
 
         // Correctly call the embed function with the actual SWF file URL
@@ -96,30 +103,16 @@
     </script>
 
     <script>
-        // Toggle fullscreen function
+        // Toggle fullscreen function using Ruffle API
         function toggleFullscreen() {
             const flashContainer = document.getElementById('flash-content');
+            const player = flashContainer.querySelector('object'); // Get the Ruffle player
             
-            if (!document.fullscreenElement) {
-                if (flashContainer.requestFullscreen) {
-                    flashContainer.requestFullscreen();
-                } else if (flashContainer.mozRequestFullScreen) { // Firefox
-                    flashContainer.mozRequestFullScreen();
-                } else if (flashContainer.webkitRequestFullscreen) { // Chrome, Safari and Opera
-                    flashContainer.webkitRequestFullscreen();
-                } else if (flashContainer.msRequestFullscreen) { // IE/Edge
-                    flashContainer.msRequestFullscreen();
-                }
+            // If fullscreen is not already enabled, request fullscreen
+            if (!player.isFullscreen) {
+                player.requestFullscreen();
             } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.mozCancelFullScreen) { // Firefox
-                    document.mozCancelFullScreen();
-                } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
-                    document.webkitExitFullscreen();
-                } else if (document.msExitFullscreen) { // IE/Edge
-                    document.msExitFullscreen();
-                }
+                player.exitFullscreen();
             }
         }
 
