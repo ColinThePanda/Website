@@ -19,8 +19,8 @@
 
         #flash-container {
             position: relative;
-            width: 80%; /* Set percentage width */
-            height: 80%; /* Set percentage height */
+            width: 80%;
+            height: 80%;
             background-color: black;
             display: flex;
             justify-content: center;
@@ -36,9 +36,9 @@
             color: white;
             border: none;
             font-size: 16px;
+            border-radius: 5px;
             cursor: pointer;
             z-index: 10;
-            border-radius: 5px;
         }
 
         .fullscreen-button:hover {
@@ -56,19 +56,24 @@
 
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <script>
-        // Define the SWF object embedding function
         var swfobject = {};
 
-        swfobject.embedSWF = function(file, cont, width, height) {
-            const ruffle = window.RufflePlayer.newest();
-            const player = document.getElementById(cont).appendChild(ruffle.createPlayer());
-            player.style.width = width + '%';
-            player.style.height = height + '%';
-            player.load(file);
+        swfobject.embedSWF = function(url, cont, width, height) {
+            try {
+                const ruffle = window.RufflePlayer.newest();
+                const player = document.getElementById(cont).appendChild(ruffle.createPlayer());
+                player.style.width = width + '%';
+                player.style.height = height + '%';
+                console.log('Ruffle Player initialized:', player);
+
+                player.load({ url: url });
+            } catch (e) {
+                console.error('Error initializing Ruffle:', e);
+            }
         };
 
-        // Embed the SWF file with percentage dimensions
-        swfobject.embedSWF('game.swf', 'flash-content', 100, 100);
+        // Embed the local SWF file
+        swfobject.embedSWF('./game.swf', 'flash-content', 100, 100);
 
         // Fullscreen toggle function
         function toggleFullscreen() {
