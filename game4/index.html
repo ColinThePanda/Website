@@ -69,8 +69,8 @@
         <div id="flash-content">
             <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
             <script>
-                // Initialize the Ruffle player using the correct method
-                const player = new RufflePlayer();
+                // Initialize the Ruffle player using create() method
+                const player = RufflePlayer.create();
                 const flashContainer = document.getElementById("flash-content");
 
                 // Append the player to the container
