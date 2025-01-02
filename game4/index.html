@@ -58,6 +58,16 @@
             }
         });
 
+        // Auto fullscreen attempt
+        window.addEventListener('load', () => {
+            if (player.requestFullscreen) {
+                player.requestFullscreen();
+                console.log('Fullscreen requested automatically.');
+            } else {
+                console.warn('Fullscreen API not supported or blocked on page load.');
+            }
+        });
+
         // Handle AudioContext restriction (browser autoplay policy)
         document.addEventListener('click', () => {
             if (typeof AudioContext !== "undefined") {
