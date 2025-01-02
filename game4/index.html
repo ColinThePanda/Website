@@ -24,7 +24,9 @@
 </head>
 <body>
     <h1>My Flash Game</h1>
-    <div id="flash-content"></div>
+    <div id="flash-content">
+        <p>Your browser does not support Flash. Playing through Ruffle...</p>
+    </div>
 
     <script>
         var ruffle = window.RufflePlayer.newest();
@@ -32,7 +34,7 @@
         document.getElementById('flash-content').appendChild(player);
         player.load("game.swf");
 
-        // Function to trigger fullscreen automatically
+        // Function to trigger fullscreen mode
         function requestFullscreen() {
             if (player.requestFullscreen) {
                 player.requestFullscreen();
@@ -45,17 +47,17 @@
             }
         }
 
-        // Wait until the player has loaded and then request fullscreen
+        // Wait until the game has loaded, then request fullscreen
         player.onload = function() {
-            var flashContainer = document.getElementById('flash-content');
-            flashContainer.style.width = '100vw';
-            flashContainer.style.height = '100vh';
+            // Make sure the game fills the screen
             player.width = window.innerWidth;
             player.height = window.innerHeight;
-            requestFullscreen(); // Automatically request fullscreen
+
+            // Automatically request fullscreen
+            requestFullscreen();
         };
 
-        // Make the game adjust to the window size
+        // Adjust the game size on window resize
         window.onresize = function() {
             player.width = window.innerWidth;
             player.height = window.innerHeight;
