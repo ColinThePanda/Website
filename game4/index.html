@@ -57,9 +57,7 @@
 </head>
 <body>
     <h1>My Flash Game</h1>
-    <div id="flash-content">
-        <p id="flash-message">Your browser does not support Flash. Playing through Ruffle...</p>
-    </div>
+    <div id="flash-content"></div>
     <button class="fullscreen-button" onclick="toggleFullscreen()">Fullscreen</button>
 
     <script>
@@ -69,41 +67,25 @@
         player.load("game.swf");
 
         player.onload = function() {
-            document.getElementById('flash-message').style.zIndex = -1;
             player.width = window.innerWidth;
             player.height = window.innerHeight;
         };
 
-        function requestFullscreen() {
-            var flashContainer = document.getElementById('flash-content');
-            if (flashContainer.requestFullscreen) {
-                flashContainer.requestFullscreen();
-            } else if (flashContainer.mozRequestFullScreen) {
-                flashContainer.mozRequestFullScreen();
-            } else if (flashContainer.webkitRequestFullscreen) {
-                flashContainer.webkitRequestFullscreen();
-            } else if (flashContainer.msRequestFullscreen) {
-                flashContainer.msRequestFullscreen();
-            }
-        }
+        // Get the Ruffle player element
+        const rufflePlayer = document.getElementById("flash-content");
 
+        // Function to toggle fullscreen
         function toggleFullscreen() {
-            var flashContainer = document.getElementById('flash-content');
-            if (!document.fullscreenElement) {
-                requestFullscreen();
-            } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                }
-            }
+        if (document.fullscreenElement) {
+            document.exitFullscreen();
+        } else {
+            rufflePlayer.requestFullscreen();
+        }
         }
 
-        window.onresize = function() {
-            if (!document.fullscreenElement) {
-                player.width = window.innerWidth;
-                player.height = window.innerHeight;
-            }
-        };
+        // Add an event listener (e.g., on a button click)
+        const fullscreenButton = document.getElementById("fullscreen-button");
+        fullscreenButton.addEventListener("click", toggleFullscreen);
     </script>
 </body>
 </html>
