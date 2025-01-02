@@ -1,6 +1,14 @@
+@font-face {
+    font-family: "Cool-Font";
+    src: url("Font.ttf");
+}
+
+* {
+    font-family: "Cool-Font";
+}
+
 /* General page styles */
 body {
-    font-family: Arial, sans-serif;
     background-color: #2f2f2f; /* Dark grey background */
     color: white;
     margin: 0;
@@ -10,33 +18,35 @@ body {
 /* Ensures the header spans the full width of the screen */
 header {
     width: 100%; /* Full width */
-    height: 10%;
-    margin: 0;   /* Removes any default margin */
-    padding: 0;  /* Removes any default padding */
+    height: 80px; /* Height of the header */
+    margin: 0;
+    padding: 0; /* Remove padding */
     background-color: #232323; /* Darker background color for the header */
     text-align: center;
     position: fixed; /* Keeps it at the top */
     top: 0;
     left: 0;
-    z-index: 1000; /* Ensures it's on top of other elements */
+    z-index: 1000; /* Ensure it's on top of other elements */
     box-shadow: 0 0 3px 10px #232323;
+    display: flex;
+    align-items: center; /* Center the logo vertically */
+    justify-content: center; /* Center the logo horizontally */
 }
 
 header .logo {
     color: #c30000; /* Dark red color */
     font-size: 50px;
-    text-decoration: none; /* Removes underline from the link */
-    padding: 10px 0;
+    text-decoration: none;
 }
 
 header .logo:hover {
     color: #8f0000; /* Slightly lighter red on hover */
 }
 
-
 /* Main content area */
 main {
-    padding: 100px 20px 20px; /* Ensure no overlap with fixed header */
+    padding: 0 20px 20px; /* Adjusted for reduced space below the fixed header */
+    margin-top: 80px; /* This ensures the content doesn't overlap with the header */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,7 +57,7 @@ main {
 /* Player container styles */
 #player-container {
     width: 100%;
-    max-width: 800px; /* Limit the player's max width */
+    max-width: 800px;
     margin-bottom: 20px;
     display: flex;
     justify-content: center;
@@ -64,10 +74,9 @@ button {
     cursor: pointer;
     transition: background-color 0.3s ease;
     display: block;
-    margin: 0 auto; /* Center the button */
+    margin: 10px auto;
 }
 
-/* Fullscreen button hover effect */
 button:hover {
     background-color: darkred;
 }
@@ -84,6 +93,7 @@ button:hover {
     transition: background-color 0.3s ease;
     display: inline-block;
     text-align: center;
+    margin-top: 20px; /* Add margin top to space the buttons properly */
 }
 
 /* Game link hover effect */
@@ -98,9 +108,4 @@ button:hover {
     gap: 20px;
     width: 80%;
     margin: 0 auto;
-}
-
-/* Add padding around the entire page */
-body {
-    padding: 20px;
 }
