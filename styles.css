@@ -10,25 +10,27 @@ body {
 /* Ensures the header spans the full width of the screen */
 header {
     width: 100%; /* Full width */
+    height: 10%;
     margin: 0;   /* Removes any default margin */
     padding: 0;  /* Removes any default padding */
-    background-color: #333; /* Darker background color for the header */
+    background-color: #232323; /* Darker background color for the header */
     text-align: center;
     position: fixed; /* Keeps it at the top */
     top: 0;
     left: 0;
     z-index: 1000; /* Ensures it's on top of other elements */
+    box-shadow: 0 0 3px 10px #232323;
 }
 
 header .logo {
-    color: #8B0000; /* Dark red color */
-    font-size: 36px;
+    color: #c30000; /* Dark red color */
+    font-size: 50px;
     text-decoration: none; /* Removes underline from the link */
     padding: 10px 0;
 }
 
 header .logo:hover {
-    color: #B22222; /* Slightly lighter red on hover */
+    color: #8f0000; /* Slightly lighter red on hover */
 }
 
 
