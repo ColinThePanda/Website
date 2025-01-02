@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Play Flash Game</title>
-    <script src="/ruffle/ruffle.js"></script> <!-- Ruffle script -->
-    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/ruffle.js"></script>
 </head>
 <body>
     <h1>My Flash Game</h1>
@@ -13,6 +12,11 @@
         <p>Your browser does not support Flash. Playing through Ruffle...</p>
     </div>
 
-    <script src="index.js"></script>
+    <script>
+        var ruffle = window.RufflePlayer.newest();
+        var player = ruffle.createPlayer();
+        document.getElementById('flash-content').appendChild(player);
+        player.load("game.swf");
+    </script>
 </body>
 </html>
