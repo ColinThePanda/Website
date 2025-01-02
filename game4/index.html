@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ruffle Flash Game</title>
     <style>
-        /* Background color */
         body {
-            background-color: #2e2e2e; /* Dark gray */
+            background-color: #2e2e2e;
             color: white;
             font-family: Arial, sans-serif;
             margin: 0;
@@ -18,7 +17,6 @@
             height: 100vh;
         }
 
-        /* Centering content */
         #flash-container {
             position: relative;
             width: 100%;
@@ -28,7 +26,6 @@
             align-items: center;
         }
 
-        /* Flash message behind the player */
         #flash-message {
             position: absolute;
             top: 50%;
@@ -39,7 +36,6 @@
             color: white;
         }
 
-        /* Fullscreen button styling */
         .fullscreen-button {
             position: absolute;
             top: 10px;
@@ -57,7 +53,6 @@
             background-color: #555;
         }
 
-        /* Ruffle player full width */
         #flash-content {
             width: 100%;
             height: 100%;
@@ -67,91 +62,57 @@
 </head>
 <body>
 
-    <!-- Fullscreen button -->
     <button class="fullscreen-button" onclick="toggleFullscreen()">Fullscreen</button>
 
-    <!-- Flash game container -->
     <div id="flash-container">
         <div id="flash-message">Your browser does not support Flash. Playing through Ruffle...</div>
         <div id="flash-content">
-            <!-- Ruffle embed script -->
             <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
             <script>
                 // Initialize Ruffle Player
-                const ruffle = window.RufflePlayer.new();
-                const player = ruffle.createPlayer();
-
-                // Attach player to the div
+                const player = RufflePlayer.new();
                 const flashContainer = document.getElementById("flash-content");
+
+                // Append the player to the container
                 flashContainer.appendChild(player);
 
-                // Load SWF file
-                player.load("game.swf");
+                // Load the SWF file
+                player.load("path/to/your/flash-game.swf");
 
-                // Hide flash message when the player is ready
+                // Hide the message when the player loads
                 player.onload = function() {
-                    // Hide flash message
                     document.getElementById('flash-message').style.display = 'none';
-                    // Resize player when loaded
                     player.width = window.innerWidth;
                     player.height = window.innerHeight;
+                    console.log('SWF loaded successfully');
+                };
+
+                // Handle errors if the SWF fails to load
+                player.onerror = function() {
+                    console.error("Error loading SWF file");
+                    document.getElementById('flash-message').innerText = "There was an error loading the Flash game.";
                 };
             </script>
         </div>
     </div>
 
     <script>
-        // Request fullscreen function
-        function requestFullscreen() {
-            var flashContainer = document.getElementById('flash-content');
-            if (flashContainer.requestFullscreen) {
-                flashContainer.requestFullscreen();
-            } else if (flashContainer.mozRequestFullScreen) { // Firefox
-                flashContainer.mozRequestFullScreen();
-            } else if (flashContainer.webkitRequestFullscreen) { // Chrome/Safari
-                flashContainer.webkitRequestFullscreen();
-            } else if (flashContainer.msRequestFullscreen) { // IE
-                flashContainer.msRequestFullscreen();
-            }
-        }
-
-        // Toggle fullscreen
+        // Toggle fullscreen function
         function toggleFullscreen() {
-            var flashContainer = document.getElementById('flash-content');
-            if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
-                // Not in fullscreen, request it
-                requestFullscreen();
+            const flashContainer = document.getElementById('flash-content');
+            if (!document.fullscreenElement) {
+                flashContainer.requestFullscreen();
             } else {
-                // Already in fullscreen, exit it
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.mozCancelFullScreen) {
-                    document.mozCancelFullScreen(); // Firefox
-                } else if (document.webkitExitFullscreen) {
-                    document.webkitExitFullscreen(); // Chrome/Safari
-                } else if (document.msExitFullscreen) {
-                    document.msExitFullscreen(); // IE
-                }
+                document.exitFullscreen();
             }
         }
 
-        // Resize player when fullscreen is toggled
-        document.addEventListener("fullscreenchange", function() {
-            if (document.fullscreenElement) {
-                // Resize player when entering fullscreen
-                const player = document.querySelector('object');
-                player.width = window.innerWidth;
-                player.height = window.innerHeight;
-            }
-        });
-
-        // Handle resizing when the window is resized
+        // Resize the player when the window is resized
         window.onresize = function() {
-            if (!document.fullscreenElement) {
-                // Resize player to match window size
-                const player = document.querySelector('object');
-                player.width = window.innerWidth;
-                player.height = window.innerHeight;
+            const flashContainer = document.getElementById('flash-content');
+            if (flashContainer) {
+                flashContainer.style.width = window.innerWidth + 'px';
+                flashContainer.style.height = window.innerHeight + 'px';
             }
         };
     </script>
