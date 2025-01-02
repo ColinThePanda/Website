@@ -59,16 +59,16 @@
         // Define the SWF object embedding function
         var swfobject = {};
 
-        swfobject.embedSWF = function(url, cont, width, height) {
+        swfobject.embedSWF = function(file, cont, width, height) {
             const ruffle = window.RufflePlayer.newest();
             const player = document.getElementById(cont).appendChild(ruffle.createPlayer());
             player.style.width = width + '%';
             player.style.height = height + '%';
-            player.load({ url: url });
+            player.load(file);
         };
 
         // Embed the SWF file with percentage dimensions
-        swfobject.embedSWF('https://colinthepanda.github.io/Godot-Website/game4/game.swf', 'flash-content', 100, 100);
+        swfobject.embedSWF('game.swf', 'flash-content', 100, 100);
 
         // Fullscreen toggle function
         function toggleFullscreen() {
