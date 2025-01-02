@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SWF Player</title>
-    <link rel="stylesheet" href="../styles.css"> <!-- Corrected path to CSS -->
+    <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
     <header>
@@ -17,19 +17,61 @@
 
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <script>
+        // Initialize Ruffle
         const ruffle = window.RufflePlayer.newest();
         const player = ruffle.createPlayer();
         const container = document.getElementById('player-container');
 
+        // Attach player to container
         container.appendChild(player);
-        player.load({ url: './game.swf' });  <!-- SWF file is in the same folder -->
 
+        // Load SWF
+        const swfPath = './game.swf'; // Ensure the SWF file is accessible at this path
+        player.load({ url: swfPath });
+
+        // Debugging: Log when SWF starts loading
+        console.log('Attempting to load SWF:', swfPath);
+
+        // Debugging: Monitor metadata event
+        player.addEventListener('loadedmetadata', () => {
+            console.log('SWF metadata loaded:', player.metadata);
+        });
+
+        // Debugging: Monitor loading completion
+        player.addEventListener('loadeddata', () => {
+            console.log('SWF fully loaded.');
+        });
+
+        // Debugging: Check for errors
+        player.addEventListener('error', (e) => {
+            console.error('Error loading SWF:', e.message || e);
+        });
+
+        // Fullscreen functionality
         const fullscreenButton = document.getElementById('fullscreen-button');
         fullscreenButton.addEventListener('click', () => {
-            if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen();
+            if (player.requestFullscreen) {
+                player.requestFullscreen();
+                console.log('Fullscreen requested.');
+            } else {
+                console.warn('Fullscreen API not supported by Ruffle or browser.');
             }
         });
+
+        // Handle AudioContext restriction (browser autoplay policy)
+        document.addEventListener('click', () => {
+            if (typeof AudioContext !== "undefined") {
+                const audioCtx = new AudioContext();
+                audioCtx.resume().then(() => {
+                    console.log('AudioContext resumed.');
+                }).catch((err) => {
+                    console.warn('Error resuming AudioContext:', err);
+                });
+            }
+        });
+
+        // Additional Debugging: Ensure container has a valid player
+        console.log('Player initialized:', player);
     </script>
 </body>
 </html>

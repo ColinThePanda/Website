@@ -1,59 +1,78 @@
-/* General styles */
+/* Apply general styling for both pages */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #f4f4f4; /* Light grey background */
-    padding: 20px;
+    background-color: #333; /* Grey background */
     margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
-/* Header bar */
 header {
-    width: 100%;
-    background-color: #333; /* Dark grey header */
-    padding: 15px 20px;
+    background-color: #222; /* Darker grey for header */
     color: white;
-    text-align: left;
+    padding: 15px 0; /* Add space around the header */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header .logo {
     font-size: 24px;
     font-weight: bold;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5); /* Drop shadow */
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    text-align: center;
 }
 
-/* Main content */
 main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
+    padding: 20px;
 }
 
 /* Player container */
 #player-container {
-    width: 80%;
-    aspect-ratio: 16 / 9; /* Keeps the player responsive */
-    margin: 20px 0;
-    background-color: black;
-    border: 2px solid #ccc; /* Light grey border */
-    border-radius: 5px; /* Matches button style */
+    background-color: #555; /* Grey background around the player */
+    padding: 20px;
+    border-radius: 8px;
 }
 
 /* Fullscreen button */
 #fullscreen-button {
+    margin-top: 20px;
+    padding: 12px 20px;
+    background-color: red;
     color: white;
-    background-color: #ff0000; /* Consistent with the existing buttons */
-    border: none;
-    border-radius: 5px; /* Rounded corners */
-    padding: 10px 20px;
-    font-size: 18px;
+    border: 2px solid black; /* Black border */
+    border-radius: 50px; /* Round button */
     cursor: pointer;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Subtle drop shadow */
-    margin-top: 10px;
 }
 
 #fullscreen-button:hover {
-    background-color: #b30000; /* Consistent hover effect */
+    background-color: #d90000; /* Slightly darker red on hover */
+}
+
+/* Homepage Link styling */
+.game-link {
+    display: inline-block;
+    margin: 15px 0;
+    font-size: 20px;
+    text-decoration: none;
+    color: white;
+    background-color: red;
+    padding: 15px 30px;
+    border-radius: 8px;
+    border: 2px solid black;
+}
+
+.game-link:hover {
+    background-color: #d90000;
+}
+
+/* Header for Homepage */
+header {
+    background-color: #222; /* Darker grey */
+    color: white;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
 }
