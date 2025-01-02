@@ -1,40 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>My Game Hub</title>
-		<style>
-			body {
-    			font-family: Arial, sans-serif;
-    			text-align: center;
-    			background-color: #f4f4f4;
-    			padding: 20px;
-			}
-			h1 {
-    			color: #333;
-			}
-			.game-link {
-   				display: block;
-    			margin: 15px 0;
-    			font-size: 20px;
-    			text-decoration: none;
-    			color: white;
-    			background-color: #007bff;
-    			padding: 10px 20px;
-    			border-radius: 5px;
-			}
-			.game-link:hover {
-    			background-color: #0056b3;
-			}
-		</style>
-	<body>
-		<h1>Welcome to My Game Hub</h1>
-		<p>Select a game to play:</p>
-		<a class="game-link" href="./game1/index.html">Play Game #1</a>
-		<a class="game-link" href="./game2/index.html">Play Game #2</a>
-		<a class="game-link" href="https://colinthepanda.itch.io/asci-renderer">Play Game #3</a>
-		<a class="game-link" href="game4/index.html">Play Game #4</a>
-		<!-- Add more links as you add games -->
-	</body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWF Player</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <h1>My Projects</h1>
+    </header>
+    <div id="player-container"></div>
+    <button id="fullscreen-button">Fullscreen</button>
+
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+    <script>
+        const ruffle = window.RufflePlayer.newest();
+        const player = ruffle.createPlayer();
+        const container = document.getElementById('player-container');
+
+        container.appendChild(player);
+        player.load({ url: './game.swf' });
+
+        const fullscreenButton = document.getElementById('fullscreen-button');
+        fullscreenButton.addEventListener('click', () => {
+            if (player.requestFullscreen) {
+                player.requestFullscreen();
+            }
+        });
+    </script>
+</body>
 </html>
