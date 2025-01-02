@@ -6,11 +6,11 @@
     <title>Ruffle Flash Game</title>
     <style>
         body {
+            margin: 0;
+            padding: 0;
             background-color: #2e2e2e;
             color: white;
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -57,6 +57,7 @@
             width: 100%;
             height: 100%;
             background-color: black;
+            display: block;
         }
     </style>
 </head>
@@ -98,10 +99,27 @@
         // Toggle fullscreen function
         function toggleFullscreen() {
             const flashContainer = document.getElementById('flash-content');
+            
             if (!document.fullscreenElement) {
-                flashContainer.requestFullscreen();
+                if (flashContainer.requestFullscreen) {
+                    flashContainer.requestFullscreen();
+                } else if (flashContainer.mozRequestFullScreen) { // Firefox
+                    flashContainer.mozRequestFullScreen();
+                } else if (flashContainer.webkitRequestFullscreen) { // Chrome, Safari and Opera
+                    flashContainer.webkitRequestFullscreen();
+                } else if (flashContainer.msRequestFullscreen) { // IE/Edge
+                    flashContainer.msRequestFullscreen();
+                }
             } else {
-                document.exitFullscreen();
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) { // Firefox
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) { // IE/Edge
+                    document.msExitFullscreen();
+                }
             }
         }
 
