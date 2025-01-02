@@ -1,4 +1,4 @@
-/* Common styles for both pages */
+/* General page styles */
 body {
     font-family: Arial, sans-serif;
     background-color: #2f2f2f; /* Dark grey background */
@@ -7,50 +7,52 @@ body {
     padding: 0;
 }
 
-/* Header styling */
+/* Header styles */
 header {
-    background-color: #333; /* Darker than the background */
-    padding: 10px 0;
+    background-color: #222; /* Darker shade for header */
+    color: red; /* Red color for text */
+    padding: 20px 0;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    position: relative;
+    position: fixed; /* Fixed to top */
     top: 0;
     width: 100%;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    font-size: 40px;
 }
 
+/* Remove link default styles from the logo */
 header .logo {
+    text-decoration: none;
     color: red; /* Red color for the logo */
-    text-decoration: none; /* Remove underline */
-    font-size: 40px; /* Large text */
-    font-weight: bold;
     transition: color 0.3s ease;
 }
 
-/* Change color on hover */
+/* Logo hover effect */
 header .logo:hover {
     color: darkred;
 }
 
-/* Center main content */
+/* Main content area */
 main {
-    padding: 20px;
+    padding: 100px 20px 20px; /* Ensure no overlap with fixed header */
     display: flex;
-    justify-content: center;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
+    justify-content: center;
+    min-height: 100vh;
 }
 
 /* Player container styles */
 #player-container {
     width: 100%;
-    max-width: 800px;
+    max-width: 800px; /* Limit the player's max width */
     margin-bottom: 20px;
     display: flex;
     justify-content: center;
 }
 
-/* Fullscreen button styling */
+/* Fullscreen button styles */
 button {
     background-color: red;
     color: white;
@@ -64,11 +66,12 @@ button {
     margin: 0 auto; /* Center the button */
 }
 
+/* Fullscreen button hover effect */
 button:hover {
     background-color: darkred;
 }
 
-/* For the homepage, make the buttons larger and create a grid layout */
+/* Homepage button styles */
 .game-link {
     background-color: red;
     color: white;
@@ -82,11 +85,12 @@ button:hover {
     text-align: center;
 }
 
+/* Game link hover effect */
 .game-link:hover {
     background-color: darkred;
 }
 
-/* Grid layout for the homepage */
+/* Dynamic grid layout for homepage */
 .main-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
