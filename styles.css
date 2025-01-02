@@ -1,78 +1,84 @@
-/* Apply general styling for both pages */
+/* Common styles for both pages */
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #333; /* Grey background */
+    background-color: #2f2f2f;
+    color: white;
     margin: 0;
     padding: 0;
-    height: 100%;
 }
 
 header {
-    background-color: #222; /* Darker grey for header */
-    color: white;
-    padding: 15px 0; /* Add space around the header */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #444;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-header .logo {
-    font-size: 24px;
+header a {
+    color: white;
+    text-decoration: none;
+    font-size: 32px;
     font-weight: bold;
-    text-align: center;
 }
 
 main {
     padding: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
 }
 
-/* Player container */
 #player-container {
-    background-color: #555; /* Grey background around the player */
-    padding: 20px;
-    border-radius: 8px;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
 }
 
-/* Fullscreen button */
-#fullscreen-button {
-    margin-top: 20px;
-    padding: 12px 20px;
+button {
     background-color: red;
     color: white;
-    border: 2px solid black; /* Black border */
-    border-radius: 50px; /* Round button */
-    cursor: pointer;
-}
-
-#fullscreen-button:hover {
-    background-color: #d90000; /* Slightly darker red on hover */
-}
-
-/* Homepage Link styling */
-.game-link {
-    display: inline-block;
-    margin: 15px 0;
-    font-size: 20px;
-    text-decoration: none;
-    color: white;
-    background-color: red;
-    padding: 15px 30px;
-    border-radius: 8px;
     border: 2px solid black;
+    border-radius: 25px;
+    padding: 15px 30px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.game-link:hover {
-    background-color: #d90000;
+button:hover {
+    background-color: darkred;
 }
 
-/* Header for Homepage */
-header {
-    background-color: #222; /* Darker grey */
+/* For the homepage, make the buttons larger and create a grid layout */
+.game-link {
+    background-color: red;
     color: white;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px 40px;
+    font-size: 24px;
+    text-decoration: none;
+    border: 2px solid black;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+    display: inline-block;
     text-align: center;
 }
 
-h1 {
-    margin: 0;
+.game-link:hover {
+    background-color: darkred;
+}
+
+/* Grid layout for the homepage */
+.main-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* Add padding around the entire page */
+body {
+    padding: 20px;
 }
