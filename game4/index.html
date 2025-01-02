@@ -19,21 +19,12 @@
 
         #flash-container {
             position: relative;
-            width: 100%;
-            height: 100%;
+            width: 80%; /* Set percentage width */
+            height: 80%; /* Set percentage height */
+            background-color: black;
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-
-        #flash-message {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 20px;
-            z-index: 1;
-            color: white;
         }
 
         .fullscreen-button {
@@ -47,28 +38,21 @@
             font-size: 16px;
             cursor: pointer;
             z-index: 10;
+            border-radius: 5px;
         }
 
         .fullscreen-button:hover {
             background-color: #555;
         }
-
-        #flash-content {
-            width: 100%;
-            height: 100%;
-            background-color: black;
-            display: block;
-        }
     </style>
 </head>
 <body>
 
+    <button class="fullscreen-button" onclick="toggleFullscreen()">Fullscreen</button>
+
     <div id="flash-container">
-        <div id="flash-message">Your browser does not support Flash. Playing through Ruffle...</div>
         <div id="flash-content"></div>
     </div>
-
-    <button class="fullscreen-button" onclick="toggleFullscreen()">Fullscreen</button>
 
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <script>
@@ -76,54 +60,29 @@
         var swfobject = {};
 
         swfobject.embedSWF = function(url, cont, width, height) {
-            var ruffle = window.RufflePlayer.newest(),
-                player = Object.assign(document.getElementById(cont).appendChild(ruffle.createPlayer()), {
-                    width: width,
-                    height: height,
-                    style: 'width: ' + width + '%; height: ' + height + '%',
-                });
-
+            const ruffle = window.RufflePlayer.newest();
+            const player = document.getElementById(cont).appendChild(ruffle.createPlayer());
+            player.style.width = width + '%';
+            player.style.height = height + '%';
             player.load({ url: url });
-
-            // Check if fullscreen is enabled
-            if (player.fullscreenEnabled) {
-                console.log("Fullscreen is enabled!");
-            } else {
-                console.log("Fullscreen is not enabled.");
-            }
         };
 
-        // Correctly call the embed function with the actual SWF file URL
-        swfobject.embedSWF('https://colinthepanda.github.io/Godot-Website/game4/game.swf', 'flash-content', '100', '100');
+        // Embed the SWF file with percentage dimensions
+        swfobject.embedSWF('https://colinthepanda.github.io/Godot-Website/game4/game.swf', 'flash-content', 100, 100);
 
-        // Hide the message when the player loads
-        window.onload = function() {
-            document.getElementById('flash-message').style.display = 'none';
-        };
-    </script>
-
-    <script>
-        // Toggle fullscreen function using Ruffle API
+        // Fullscreen toggle function
         function toggleFullscreen() {
-            const flashContainer = document.getElementById('flash-content');
-            const player = flashContainer.querySelector('object'); // Get the Ruffle player
-            
-            // If fullscreen is not already enabled, request fullscreen
-            if (!player.isFullscreen) {
-                player.requestFullscreen();
-            } else {
-                player.exitFullscreen();
+            const container = document.getElementById('flash-container');
+            if (container.requestFullscreen) {
+                container.requestFullscreen();
+            } else if (container.mozRequestFullScreen) { // Firefox
+                container.mozRequestFullScreen();
+            } else if (container.webkitRequestFullscreen) { // Chrome, Safari, Opera
+                container.webkitRequestFullscreen();
+            } else if (container.msRequestFullscreen) { // IE/Edge
+                container.msRequestFullscreen();
             }
         }
-
-        // Resize the player when the window is resized
-        window.onresize = function() {
-            const flashContainer = document.getElementById('flash-content');
-            if (flashContainer) {
-                flashContainer.style.width = window.innerWidth + 'px';
-                flashContainer.style.height = window.innerHeight + 'px';
-            }
-        };
     </script>
 </body>
 </html>
