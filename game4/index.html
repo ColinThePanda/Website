@@ -66,35 +66,33 @@
 
     <div id="flash-container">
         <div id="flash-message">Your browser does not support Flash. Playing through Ruffle...</div>
-        <div id="flash-content">
-            <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
-            <script>
-                // Initialize the Ruffle player using create() method
-                const player = RufflePlayer.create();
-                const flashContainer = document.getElementById("flash-content");
-
-                // Append the player to the container
-                flashContainer.appendChild(player);
-
-                // Load the SWF file
-                player.load("path/to/your/flash-game.swf");
-
-                // Hide the message when the player loads
-                player.onload = function() {
-                    document.getElementById('flash-message').style.display = 'none';
-                    player.width = window.innerWidth;
-                    player.height = window.innerHeight;
-                    console.log('SWF loaded successfully');
-                };
-
-                // Handle errors if the SWF fails to load
-                player.onerror = function() {
-                    console.error("Error loading SWF file");
-                    document.getElementById('flash-message').innerText = "There was an error loading the Flash game.";
-                };
-            </script>
-        </div>
+        <div id="flash-content"></div>
     </div>
+
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+    <script>
+        // Define the SWF object embedding function
+        var swfobject = {};
+
+        swfobject.embedSWF = function(url, cont, width, height) {
+            var ruffle = window.RufflePlayer.newest(),
+                player = Object.assign(document.getElementById(cont).appendChild(ruffle.createPlayer()), {
+                    width: width,
+                    height: height,
+                    style: 'width: ' + width + 'px; height: ' + height + 'px',
+                });
+
+            player.load({ url: url });
+        };
+
+        // Call the embed function with the SWF file and container ID
+        swfobject.embedSWF('path/to/your/flash-game.swf', 'flash-content', '100%', '100%');
+
+        // Hide the message when the player loads
+        window.onload = function() {
+            document.getElementById('flash-message').style.display = 'none';
+        };
+    </script>
 
     <script>
         // Toggle fullscreen function
