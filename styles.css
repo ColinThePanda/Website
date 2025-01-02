@@ -1,4 +1,4 @@
-/* Common styles for both pages */
+/* General page styles */
 body {
     font-family: Arial, sans-serif;
     background-color: #2f2f2f; /* Dark grey background */
@@ -7,41 +7,44 @@ body {
     padding: 0;
 }
 
-/* Header styling */
+/* Header styles */
 header {
-    background-color: #333; /* Darker than the background */
-    padding: 10px 0;
+    background-color: #222; /* Darker than the background */
+    color: red;
+    padding: 15px 0;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    position: relative;
+    position: fixed; /* Make it fixed at the top */
     top: 0;
     width: 100%;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
+/* Logo styles */
 header .logo {
-    color: red; /* Red color for the logo */
-    text-decoration: none; /* Remove underline */
-    font-size: 40px; /* Large text */
+    font-size: 40px;
     font-weight: bold;
+    text-decoration: none;
+    color: red; /* Red color for the logo */
     transition: color 0.3s ease;
 }
 
-/* Change color on hover */
+/* Logo hover effect */
 header .logo:hover {
     color: darkred;
 }
 
-/* Center main content */
+/* Main content (player container and button) */
 main {
-    padding: 20px;
+    padding: 100px 20px 20px; /* Ensure the header does not overlap the content */
     display: flex;
-    justify-content: center;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
+    justify-content: center;
+    min-height: 100vh;
 }
 
-/* Player container styles */
+/* Centered player container */
 #player-container {
     width: 100%;
     max-width: 800px;
@@ -50,7 +53,7 @@ main {
     justify-content: center;
 }
 
-/* Fullscreen button styling */
+/* Fullscreen button styles */
 button {
     background-color: red;
     color: white;
@@ -82,6 +85,7 @@ button:hover {
     text-align: center;
 }
 
+/* Game link hover effect */
 .game-link:hover {
     background-color: darkred;
 }
